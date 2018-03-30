@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.marwa.applicationy.PartyActivity">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+
+
+
+            <TextView
+                android:id="@+id/textViewHall"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="TextView"
+                android:layout_marginBottom="30dp"
+                />
+
+
+            <TextView
+                android:id="@+id/textViewDecor"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="TextView"
+                android:layout_marginBottom="30dp"
+                />
+
+            <TextView
+                android:id="@+id/textViewFood"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="TextView"
+                android:layout_marginBottom="30dp"
+                />
+
+            <TextView
+                android:id="@+id/textViewPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="TextView"
+                android:layout_marginBottom="30dp"
+                />
+
+
+            <TextView
+                android:id="@+id/textViewMusic"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="TextView"
+                android:layout_marginBottom="30dp"
+                />
+
+
+            <TextView
+                android:id="@+id/textViewMakeup"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="TextView"
+                android:layout_marginBottom="30dp"
+                />
+
+
+            <TextView
+                android:id="@+id/textViewHairDresser"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="TextView"
+                android:layout_marginBottom="30dp"
+                />
+
+            <TextView
+                android:id="@+id/textViewCustom"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="TextView"
+                android:layout_marginBottom="30dp"
+                />
+
+            <TextView
+                android:id="@+id/textViewClown"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="TextView"
+                android:layout_marginBottom="30dp"
+
+                />
+
+
+
+            <Button
+                android:id="@+id/confirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                tools:layout_editor_absoluteY="472dp" />
+
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="432dp" />
+
+    </LinearLayout>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

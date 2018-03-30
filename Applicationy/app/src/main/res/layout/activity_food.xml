@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.marwa.applicationy.FoodActivity"
+    android:background="#e6e6ff">
+
+    <ScrollView
+        android:layout_width="380dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="83dp"
+        tools:ignore="MissingConstraints">
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="380dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewUserEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="The Food you have.\nJust click to delete!"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fillViewport="true">
+
+            <ListView
+                android:id="@+id/list3"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"></ListView>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/add2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorPrimary"
+            android:onClick="uploadData"
+            android:text="ADD Food"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+
+
+
+        <EditText
+            android:id="@+id/editTextPrice2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Price in SR"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/uploadImage2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="browseImages"
+            android:text="Upload Image"
+
+            android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/insertImages2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@mipmap/ic_launcher" />
+        <RadioGroup
+            android:id="@+id/radioType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/radioAppetizer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Appetizer"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/radioMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Main course" />
+
+            <RadioButton
+                android:id="@+id/radioDessert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dessert" />
+            <RadioButton
+                android:id="@+id/radioCake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cake" />
+        </RadioGroup>
+
+
+        <Button
+                android:id="@+id/addNew2"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+                android:background="@color/colorPrimary"
+                android:onClick="uploadData"
+                android:text="ADD the new Food"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimary"
+                android:text="Logout"
+
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+
+
+
+
+    </LinearLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
+
+
+

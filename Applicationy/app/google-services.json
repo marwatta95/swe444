@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "490286094185",
+    "firebase_url": "https://applicationy-25e14.firebaseio.com",
+    "project_id": "applicationy-25e14",
+    "storage_bucket": "applicationy-25e14.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490286094185:android:2aa849232bc09c65",
+        "android_client_info": {
+          "package_name": "net.marwa.applicationy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490286094185-8o358r5n4gg4mqrd16pf38sd1idi0k89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEyKwRg4sCcdGjNCNozuGFXmzHNcRzrMY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

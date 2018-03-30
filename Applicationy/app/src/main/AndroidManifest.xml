@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="net.marwa.applicationy">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".activity_profile" />
+        <activity android:name=".AdminActivity" />
+        <activity android:name=".HallActivity" />
+        <activity android:name=".DecorActivity" />
+        <activity android:name=".FoodActivity" />
+        <activity android:name=".PhotoActivity" />
+        <activity android:name=".DjActivity" />
+        <activity android:name=".BandActivity" />
+        <activity android:name=".SingerActivity" />
+        <activity android:name=".HairActivity" />
+        <activity android:name=".MakeupActivity" />
+        <activity android:name=".ClownActivity" />
+        <activity android:name=".InvitationActivity" />
+        <activity android:name=".CustomActivity" />
+        <activity
+            android:name=".UserHomeActivity"
+            android:label="@string/title_activity_user_home"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".UserFirstActivity"
+            android:label="@string/title_activity_user_first"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChooseHallActivity"
+            android:label="@string/title_activity_choose_hall"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChooseDecorationActivity"
+            android:label="@string/title_activity_choose_decoration"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChooseFoodActivity"
+            android:label="@string/title_activity_choose_food"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChoosePhotoActivity"
+            android:label="@string/title_activity_choose_photo"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChooseMusicActivity"
+            android:label="@string/title_activity_choose_music"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChooseDjActivity"
+            android:label="@string/title_activity_choose_dj"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChooseBandActivity"
+            android:label="@string/title_activity_choose_band"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChooseSingerActivity"
+            android:label="@string/title_activity_choose_singer"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChooseMakeupActivity"
+            android:label="@string/title_activity_choose_makeup"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChooseHairActivity"
+            android:label="@string/title_activity_choose_hair"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChooseClownActivity"
+            android:label="@string/title_activity_choose_clown"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ChooseCustomActivity"
+            android:label="@string/title_activity_choose_custom"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".PartyActivity" />
+        <activity android:name=".HeadActivity" />
+        <activity
+            android:name=".NotificationActivity"
+            android:label="@string/title_activity_notification"
+            android:theme="@style/AppTheme"></activity>
+    </application>
+
+</manifest>
