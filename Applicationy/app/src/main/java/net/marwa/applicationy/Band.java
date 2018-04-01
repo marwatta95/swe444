@@ -1,9 +1,10 @@
 package net.marwa.applicationy;
 
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Band {
+public class Band implements Serializable{
     String first,phone;
     int last;
     double price;
@@ -28,6 +29,7 @@ public class Band {
     {
         return price;
     }
+    public String getName(){return first+" "+last;}
 
 
 

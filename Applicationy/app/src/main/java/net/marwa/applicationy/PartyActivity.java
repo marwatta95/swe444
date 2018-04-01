@@ -50,78 +50,105 @@ public class PartyActivity extends AppCompatActivity {
     private Head yourHead;
     List<Head> list;
     private StorageReference storageReference;
-
+   Hall h;
+Hall hallO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_party);
 
-        notification=new NotificationCompat.Builder( this );
+        notification=new NotificationCompat.Builder( this,"default" );
         notification.setAutoCancel( true );
 // showing the party information
 
         Intent intent = getIntent();
-        final String type1 = intent.getExtras().getString( "type" );
-        final String date1 = intent.getExtras().getString( "date" );
-        final String guests1 = intent.getExtras().getString( "guests" );
-        final String location1 = intent.getExtras().getString( "location" );
-        final String hall1 = intent.getExtras().getString( "hall" );
-        final String decor1 = intent.getExtras().getString( "decor" );
-        final String appetizer1 = intent.getExtras().getString( "appetizer" );
-        final String main1 = intent.getExtras().getString( "main" );
-        final String dessert1 = intent.getExtras().getString( "dessert" );
-        final String cake1 = intent.getExtras().getString( "cake" );
-        final String photographer1 = intent.getExtras().getString( "photographer" );
-        final String singer1 = intent.getExtras().getString( "singer" );
-        final String dj1 = intent.getExtras().getString( "dj" );
-        final String band1 = intent.getExtras().getString( "band" );
-        final String makeup1 = intent.getExtras().getString( "makeup" );
-        final String hair1 = intent.getExtras().getString( "hair" );
-        final String clown1=intent.getExtras().getString("clown");
+        final String type = intent.getExtras().getString( "type" );
+        final String date = intent.getExtras().getString( "date" );
+        final String guests = intent.getExtras().getString( "guests" );
+        final String location = intent.getExtras().getString( "location" );
+        final String hallS=intent.getStringExtra("hallS");
+        final String decorS=intent.getStringExtra("decorS");
+        final String appetizerS = intent.getStringExtra( "appetizerS" );
+        final String mainS = intent.getStringExtra( "mainS" );
+        final String dessertS = intent.getStringExtra( "dessertS" );
+        final String cakeS = intent.getStringExtra( "cakeS" );
+        final String photographerS = intent.getStringExtra("photoS" );
+        final String singerS = intent.getStringExtra( "singerS" );
+        final String djS = intent.getStringExtra( "djS" );
+        final String bandS =  intent.getStringExtra( "bandS" );
+        final String makeupS = intent.getStringExtra( "makeupS" );
+        final String hairS = intent.getStringExtra( "hairS" );
+        final String clownS=intent.getStringExtra("clownS");
+        final String customS=intent.getStringExtra("customS");
 
         list = new ArrayList<>();
-        //
-        final String custom1="";
-        clown = (TextView) findViewById(R.id.textViewClown);
-
-
         hall = (TextView)findViewById(R.id.textViewHall);
-        hall.setText(hall1);
-
         decor = (TextView)findViewById(R.id.textViewDecor);
-        decor.setText(decor1);
-
-        photographer = (TextView)findViewById(R.id.textViewPhoto);
-        photographer.setText(photographer1);
-
-        music = (TextView)findViewById(R.id.textViewMusic);
-        if(singer1!=null)
-            music.setText(singer1);
-        else   if(dj1!=null)
-            music.setText(dj1);
-        else if(band1!=null)
-            music.setText(band1);
-
-
         food = (TextView)findViewById(R.id.textViewFood);
-        if(appetizer1!=null)
-            food.setText(appetizer1+"\n"+dessert1+"\n"+main1+"\n"+cake1);
-
-
+        photographer = (TextView)findViewById(R.id.textViewPhoto);
+        clown = (TextView) findViewById(R.id.textViewClown);
+        music = (TextView)findViewById(R.id.textViewMusic);
         makeup=(TextView)findViewById(R.id.textViewMakeup);
-        makeup.setText(makeup1);
-
         hair=(TextView)findViewById(R.id.textViewHairDresser);
-        hair.setText(hair1);
+        custom = (TextView)findViewById(R.id.textViewCustom);
+        clown.setVisibility(View.INVISIBLE);
+if(hallS!=null)
+   hall.setText("Your hall is: "+hallS);
+else hall.setVisibility(View.INVISIBLE);
+if(decorS!=null)
+   decor.setText("Your decoration is: "+decorS);
+else decor.setVisibility(View.INVISIBLE);
 
-        if(type1.equals("Birthday")) {
-            clown.setText(clown1);
+String food1="";
+     if(appetizerS!=null)
+         food1="You choose : "+appetizerS;
+     if(dessertS!=null)
+         food1+=" , "+dessertS;
+     if(mainS!=null)
+         food1+= " , "+mainS;
+     if(cakeS!=null)
+         food1+=" , "+cakeS;
+     if(food1!="")
+      food.setText(food1);
+     else food.setVisibility(View.INVISIBLE);
+
+        if(photographerS!=null)
+     photographer.setText("Your photographer is: "+photographerS);
+        else photographer.setVisibility(View.INVISIBLE);
+
+        if(makeupS!=null)
+        makeup.setText("Your makeup artist is: "+makeupS);
+        else makeup.setVisibility(View.INVISIBLE);
+
+        if(hairS!=null)
+        hair.setText("Your hair dresser is: "+hairS);
+        else hair.setVisibility(View.INVISIBLE);
+
+        if(customS!=null)
+        custom.setText("Your custom is: "+customS);
+        else custom.setVisibility(View.INVISIBLE);
+
+
+
+        // set text for music
+        String mucis1="";
+        if(singerS!=null)
+            mucis1="singer: "+singerS;
+         if(djS!=null)
+           mucis1+="  Dj: "+djS;
+         if(bandS!=null)
+             mucis1+="  Band: "+bandS;
+         if(mucis1!="")
+            music.setText(mucis1);
+         else music.setVisibility(View.INVISIBLE);
+
+        // set text for clown
+        if(type.equals("Birthday")) {
+            if(clownS!=null)
+            clown.setText("Your Clown is: "+clownS);
             clown.setVisibility(View.VISIBLE);
         }
-
-            /*    custom = (TextView)findViewById(R.id.textViewCustom);
-                custom.setText(custom1, TextView.BufferType.EDITABLE);*/
 
         // if the user want to cancel the party
         cancel=(Button) findViewById(R.id.cancel);
@@ -134,7 +161,7 @@ public class PartyActivity extends AppCompatActivity {
             }
         });
 
-       //***************************************************************************************
+        //***************************************************************************************
 
         dr = FirebaseDatabase.getInstance().getReference(HeadActivity.DATABASE_PATH);
         dr.addValueEventListener(new ValueEventListener() {
@@ -165,41 +192,20 @@ public class PartyActivity extends AppCompatActivity {
         confirm=(Button) findViewById(R.id.confirm);
         confirm.setOnClickListener( new View.OnClickListener()   {
             public void onClick(View v){
-                  //
-                final ProgressDialog progressDialog = new ProgressDialog(getApplicationContext());
+                //
+                final ProgressDialog progressDialog = new ProgressDialog(PartyActivity.this);
                 progressDialog.setTitle("Saving Party Info..!!");
                 progressDialog.show();
-
-
-                        if((singer1!=null)&&(appetizer1!=null))
-                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("appetizer"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
-                        if((singer1!=null)&&(dessert1!=null))
-                party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("dessert"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
-                if((singer1!=null)&&(cake1!=null))
-                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("cake"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
-                if((singer1!=null)&&(main1!=null))
-                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("main"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
-
-
-                if((band1!=null)&&(appetizer1!=null))
-                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("appetizer"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
-                if((band1!=null)&&(dessert1!=null))
-                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("dessert"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
-                if((band1!=null)&&(cake1!=null))
-                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("cake"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
-                if((band1!=null)&&(main1!=null))
-                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("main"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
-
-
-                if((dj1!=null)&&(appetizer1!=null))
-                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("appetizer"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
-                if((dj1!=null)&&(dessert1!=null))
-                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("dessert"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
-                if((dj1!=null)&&(cake1!=null))
-                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("cake"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
-                if((dj1!=null)&&(main1!=null))
-                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("main"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
-
+                if(appetizerS!=null)
+             party=new Party(hallS,decorS,bandS,clownS,customS,djS,appetizerS ,hairS,photographerS,makeupS,singerS);
+            else    if(mainS!=null)
+                    party=new Party(hallS,decorS,bandS,clownS,customS,djS,mainS ,hairS,photographerS,makeupS,singerS);
+            else    if(cakeS!=null)
+                    party=new Party(hallS,decorS,bandS,clownS,customS,djS,cakeS ,hairS,photographerS,makeupS,singerS);
+           else     if(dessertS!=null)
+                    party=new Party(hallS,decorS,bandS,clownS,customS,djS,dessertS ,hairS,photographerS,makeupS,singerS);
+           else
+                    party=new Party(hallS,decorS,bandS,clownS,customS,djS,"No food" ,hairS,photographerS,makeupS,singerS);
 
                 // to the database
                 dr= FirebaseDatabase.getInstance().getReference();
@@ -223,7 +229,7 @@ public class PartyActivity extends AppCompatActivity {
                 notification.setContentText( "This head is been assigned to help you in your party and makes sure you are fully satisfied \n "+yourHead );
 
                 Intent intent=new Intent(getApplicationContext(),NotificationActivity.class);
-                 intent.putExtra( "notification","This head is been assigned to help you in your party and makes sure you are fully satisfied \n "+yourHead.toString() );
+                intent.putExtra( "notification","This head is been assigned to help you in your party and makes sure you are fully satisfied \n "+yourHead.toString() );
                 PendingIntent pendingIntent=PendingIntent.getActivity(getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
                 notification.setContentIntent( pendingIntent );
                 NotificationManager nm = (NotificationManager) getSystemService( NOTIFICATION_SERVICE );
@@ -235,6 +241,107 @@ public class PartyActivity extends AppCompatActivity {
 
 
             }});
+
+
+
+
+        /*    @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+
+
+
+
+
+
+               for (DataSnapshot messageSnapshot: dataSnapshot.getChildren()) {
+                    String name = (String) messageSnapshot.child("name").getValue();
+                    String message = (String) messageSnapshot.child("message").getValue();
+                }
+            }
+
+        */
+
+
+
+           /*
+        hall.setText(hallS);
+   //  final  Hall[] h;
+     //   h = (Hall[])intent.getSerializableExtra("hallO");
+     /*   final String type1 = intent.getExtras().getString( "type" );
+        final String date1 = intent.getExtras().getString( "date" );
+        final String guests1 = intent.getExtras().getString( "guests" );
+        final String location1 = intent.getExtras().getString( "location" );
+        final String hall1 = intent.getExtras().getString( "hall" );
+        final String decor1 = intent.getExtras().getString( "decor" );
+        final String appetizer1 = intent.getExtras().getString( "appetizer" );
+        final String main1 = intent.getExtras().getString( "main" );
+        final String dessert1 = intent.getExtras().getString( "dessert" );
+        final String cake1 = intent.getExtras().getString( "cake" );
+        final String photographer1 = intent.getExtras().getString( "photographer" );
+        final String singer1 = intent.getExtras().getString( "singer" );
+        final String dj1 = intent.getExtras().getString( "dj" );
+        final String band1 = intent.getExtras().getString( "band" );
+        final String makeup1 = intent.getExtras().getString( "makeup" );
+        final String hair1 = intent.getExtras().getString( "hair" );
+        final String clown1=intent.getExtras().getString("clown");
+        final String custom1=intent.getExtras().getString("custom");
+        final Hall hallO=(Hall)intent.getSerializableExtra("hallO");
+        final Decor decorO=(Decor)intent.getSerializableExtra("decorO");
+        final Food appetizerO=(Food)intent.getSerializableExtra("appetizerO");
+        final Food mainO=(Food)intent.getSerializableExtra("mainO");
+        final Food dessertO=(Food)intent.getSerializableExtra("dessertO");
+        final Food cakeO=(Food)intent.getSerializableExtra("cakeO");
+        final Photographer photographerO=(Photographer)intent.getSerializableExtra("photographerO");
+        final Dj  djO=(Dj)intent.getSerializableExtra("djO");
+        final Band  bandO=(Band) intent.getSerializableExtra("bandO");
+        final Singer  singerO=(Singer) intent.getSerializableExtra("singerO");
+        final MakeUp makeupO=(MakeUp)intent.getSerializableExtra("makeupO");
+        final Hair hairO=(Hair)intent.getSerializableExtra("hairO");
+        final Clown clownO=(Clown)intent.getSerializableExtra("clownO");
+        final Custom customO=(Custom)intent.getSerializableExtra("customO");
+*/
+
+
+
+
+
+
+
+/*
+pp p;
+                    //    if((singer1!=null)&&(appetizer1!=null))
+                     p= new pp(hallS,decorS);
+    /*                    if((singer1!=null)&&(dessert1!=null))
+                party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decorO"),(Band) getIntent().getSerializableExtra("BandO"),(Clown) getIntent().getSerializableExtra("clownO"),(Custom) getIntent().getSerializableExtra("customO"),(Dj)getIntent().getSerializableExtra("singerO"),(Food) getIntent().getSerializableExtra("dessertO"),(Hair) getIntent().getSerializableExtra("hairO"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
+                if((singer1!=null)&&(cake1!=null))
+                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decorO"),(Band) getIntent().getSerializableExtra("BandO"),(Clown) getIntent().getSerializableExtra("clownO"),(Custom) getIntent().getSerializableExtra("customO"),(Dj)getIntent().getSerializableExtra("singerO"),(Food) getIntent().getSerializableExtra("cakeO"),(Hair) getIntent().getSerializableExtra("hairO"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
+                if((singer1!=null)&&(main1!=null))
+                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decorO"),(Band) getIntent().getSerializableExtra("BandO"),(Clown) getIntent().getSerializableExtra("clownO"),(Custom) getIntent().getSerializableExtra("customO"),(Dj)getIntent().getSerializableExtra("singerO"),(Food) getIntent().getSerializableExtra("mainO"),(Hair) getIntent().getSerializableExtra("hairO"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
+*/
+/*
+                if((band1!=null)&&(appetizer1!=null))
+                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("appetizer"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
+                if((band1!=null)&&(dessert1!=null))
+                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("dessert"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
+                if((band1!=null)&&(cake1!=null))
+                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("cake"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
+                if((band1!=null)&&(main1!=null))
+                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("main"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
+
+
+                if((dj1!=null)&&(appetizer1!=null))
+                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("appetizer"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
+                if((dj1!=null)&&(dessert1!=null))
+                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("dessert"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
+                if((dj1!=null)&&(cake1!=null))
+                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("cake"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
+                if((dj1!=null)&&(main1!=null))
+                    party= new Party((Hall)getIntent().getSerializableExtra("hall"),(Decor) getIntent().getSerializableExtra("decor"),(Band) getIntent().getSerializableExtra("Band"),(Clown) getIntent().getSerializableExtra("clown"),(Custom) getIntent().getSerializableExtra("custom"),(Dj)getIntent().getSerializableExtra("singer"),(Food) getIntent().getSerializableExtra("main"),(Hair) getIntent().getSerializableExtra("hair"),(Photographer)getIntent().getSerializableExtra("photographer"),(MakeUp)getIntent().getSerializableExtra("makeup"),(Singer) getIntent().getSerializableExtra("singer"));
+
+*/
+
 
 
 

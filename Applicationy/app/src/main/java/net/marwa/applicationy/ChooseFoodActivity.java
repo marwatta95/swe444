@@ -52,13 +52,17 @@ public class ChooseFoodActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
+        final  Intent intent1=new Intent(ChooseFoodActivity.this, ChoosePhotoActivity.class);
         final String type = intent.getExtras().getString( "type" );
         final String date = intent.getExtras().getString( "date" );
         final String guests = intent.getExtras().getString( "guests" );
         final String location = intent.getExtras().getString( "location" );
-        final String hall = intent.getExtras().getString( "hall" );
-        final String decor = intent.getExtras().getString( "decor" );
+        final String hallS=intent.getStringExtra("hallS");
+        final String decorS=intent.getStringExtra("decorS");
+        final Food[] foodChosen = new Food[1];
 
+        /*  final Hall hallO=(Hall)intent.getSerializableExtra("hallO");
+        final Decor decorO=(Decor)intent.getSerializableExtra("decorO");*/
         list = new ArrayList<>();
         list1 = new ArrayList<>();
         list2 = new ArrayList<>();
@@ -120,141 +124,160 @@ public class ChooseFoodActivity extends AppCompatActivity {
                         .setAction( "Action", null ).show();
             }
         } );
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
+                foodChosen[0] =list.get(position);
 
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        ChooseFoodActivity.this );
+                alert.setTitle( "Confirm" );
+                alert.setMessage( "Are you sure you want this? " );
+                alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
 
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        intent1.putExtra( "appetizerS",(String) foodChosen[0].getType() );
+                    //    intent1.putExtra( "appetizerO", databaseReference.getRoot().child( DATABASE_PATH ).child( keyList.get( position ) ).getClass().toString() );
+
+                        Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
+                        dialog.dismiss();
+
+                    }
+                } );
+                alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                } );
+
+                alert.show();
+
+            }
+        });
+        listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
+                foodChosen[0] =list.get(position);
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        ChooseFoodActivity.this );
+                alert.setTitle( "Confirm" );
+                alert.setMessage( "Are you sure you want this? " );
+                alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        intent1.putExtra( "mainS",(String) foodChosen[0].getType() );
+                   //     intent1.putExtra( "mainO", databaseReference.getRoot().child( DATABASE_PATH ).child( keyList.get( position ) ).getClass() );
+
+                        Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
+                        dialog.dismiss();
+
+                    }
+                } );
+                alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                } );
+
+                alert.show();
+
+            }
+        });
+        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
+                foodChosen[0] =list.get(position);
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        ChooseFoodActivity.this );
+                alert.setTitle( "Confirm" );
+                alert.setMessage( "Are you sure you want this? " );
+                alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        intent1.putExtra( "dessertS",(String) foodChosen[0].getType() );
+                     //   intent1.putExtra( "dessertO", databaseReference.getRoot().child( DATABASE_PATH ).child( keyList.get( position ) ).getClass() );
+
+                        Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
+                        dialog.dismiss();
+
+                    }
+                } );
+                alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                } );
+
+                alert.show();
+
+            }
+        });
+        listView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
+                foodChosen[0] =list.get(position);
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        ChooseFoodActivity.this );
+
+                alert.setTitle( "Confirm" );
+                alert.setMessage( "Are you sure you want this? " );
+                alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        intent1.putExtra( "cakeS",(String) foodChosen[0].getType() );
+                    //    intent1.putExtra( "cakeO", databaseReference.getRoot().child( DATABASE_PATH ).child( keyList.get( position ) ).getClass() );
+
+                        Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
+                        dialog.dismiss();
+
+                    }
+                } );
+                alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                } );
+
+                alert.show();
+
+            }
+        });
         next=(Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                final  Intent intent=new Intent(ChooseFoodActivity.this, ChoosePhotoActivity.class);
-                intent.putExtra( "type", type );
-                intent.putExtra( "date", date );
-                intent.putExtra( "guests", guests );
-                intent.putExtra( "location", location );
-                intent.putExtra( "hall", hall );
-                intent.putExtra( "decor", decor );
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(
-                                ChooseFoodActivity.this );
-                        alert.setTitle( "Confirm" );
-                        alert.setMessage( "Are you sure you want this? " );
-                        alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                intent.putExtra( "appetizer", databaseReference.getRoot().child( DATABASE_PATH ).child( keyList.get( position ) ).getClass().toString() );
-                                Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
-                                dialog.dismiss();
+                intent1.putExtra( "type", type );
+                intent1.putExtra( "date", date );
+                intent1.putExtra( "guests", guests );
+                intent1.putExtra( "location", location );
+                intent1.putExtra( "hallS", hallS );
+                intent1.putExtra( "decorS", decorS );
+              /*  intent1.putExtra("hallO",hallO);
+                intent1.putExtra("decorO",decorO);*/
 
-                            }
-                        } );
-                        alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
 
-                                dialog.dismiss();
-                            }
-                        } );
-
-                        alert.show();
-
-                    }
-                });
-
-                listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(
-                                ChooseFoodActivity.this );
-                        alert.setTitle( "Confirm" );
-                        alert.setMessage( "Are you sure you want this? " );
-                        alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                intent.putExtra( "main", databaseReference.getRoot().child( DATABASE_PATH ).child( keyList.get( position ) ).getClass().toString() );
-                                Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
-                                dialog.dismiss();
-
-                            }
-                        } );
-                        alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                dialog.dismiss();
-                            }
-                        } );
-
-                        alert.show();
-
-                    }
-                });
-                listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(
-                                ChooseFoodActivity.this );
-                        alert.setTitle( "Confirm" );
-                        alert.setMessage( "Are you sure you want this? " );
-                        alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                intent.putExtra( "dessert", databaseReference.getRoot().child( DATABASE_PATH ).child( keyList.get( position ) ).getClass().toString() );
-                                Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
-                                dialog.dismiss();
-
-                            }
-                        } );
-                        alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                dialog.dismiss();
-                            }
-                        } );
-
-                        alert.show();
-
-                    }
-                });
-                listView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(
-                                ChooseFoodActivity.this );
-                        alert.setTitle( "Confirm" );
-                        alert.setMessage( "Are you sure you want this? " );
-                        alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                intent.putExtra( "cake", databaseReference.getRoot().child( DATABASE_PATH ).child( keyList.get( position ) ).getClass().toString() );
-                                Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
-                                dialog.dismiss();
-
-                            }
-                        } );
-                        alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                dialog.dismiss();
-                            }
-                        } );
-
-                        alert.show();
-
-                    }
-                });
-                startActivity(intent);
+                startActivity(intent1);
 
 
 

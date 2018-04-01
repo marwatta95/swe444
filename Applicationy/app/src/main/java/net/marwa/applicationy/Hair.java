@@ -1,9 +1,10 @@
 package net.marwa.applicationy;
 
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Hair {
+public class Hair implements Serializable{
     String first,last,phone;
     double price;
     LinkedList<String> dates=new LinkedList<String>();
@@ -24,7 +25,7 @@ public class Hair {
     {
         return price;
     }
-
+    public String getName(){return first+"  "+last;}
     public String getLast() {
         return last;
     }

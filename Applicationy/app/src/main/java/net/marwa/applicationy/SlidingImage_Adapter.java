@@ -12,9 +12,7 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 
-    /**
-     * Created by Parsania Hardik on 23/04/2016.
-     */
+
     public class SlidingImage_Adapter extends PagerAdapter {
 
 

@@ -1,7 +1,9 @@
 package net.marwa.applicationy;
 
 
-public class Food {
+import java.io.Serializable;
+
+public class Food implements Serializable{
     String type;
     double price;
     String imageUri;

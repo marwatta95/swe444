@@ -1,23 +1,21 @@
 package net.marwa.applicationy;
 
-import android.provider.ContactsContract;
-
 
 public class Party {
 
-    Hall hall;
-    Decor decor;
-    Band  band;
-    Clown clown;
-    Custom custom;
-    Dj dj;
-    Food food;
-    Hair hair;
-    Photographer photo;
-    MakeUp makeup;
-    Singer singer;
+    String hall;
+    String decor;
+    String  band;
+    String clown;
+    String custom;
+    String dj;
+    String food;
+    String hair;
+    String photo;
+    String makeup;
+    String  singer;
 
-    public Party(Hall hall, Decor decor, Band band, Clown clown, Custom custom, Dj dj, Food food, Hair hair, Photographer photo,MakeUp makeup,Singer singer){
+    public Party(String hall, String decor, String band, String clown, String custom, String dj, String food, String hair, String photo, String makeup, String singer){
 
         this.hall=hall;
         this.decor=decor;

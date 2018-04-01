@@ -1,12 +1,11 @@
 package net.marwa.applicationy;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-/**
- * Created by samar fares on 3/2/2018.
- */
 
-public class Hall {
+
+public class Hall implements Serializable {
     String name,description,address;
     int capacity;double price;
     String imageUri;

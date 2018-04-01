@@ -44,21 +44,27 @@ public class ChooseDecorationActivity extends AppCompatActivity {
         listView=(ListView) findViewById( R.id.list1);
 
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
+        final  Intent intent1=new Intent(ChooseDecorationActivity.this, ChooseFoodActivity.class);
+      //  final Bundle bundle1=new Bundle();
+  //      final Bundle bundle= getIntent().getExtras();
+
+        final Decor[] decorChosen = new Decor[1];
+        //get the info from last activity
         final String type = intent.getExtras().getString( "type" );
         final String date = intent.getExtras().getString( "date" );
         final String guests = intent.getExtras().getString( "guests" );
         final String location = intent.getExtras().getString( "location" );
-        final String hall = intent.getExtras().getString( "hall" );
-
-
+        final String hallS=intent.getStringExtra("hallS");
+        // there is an exception
+ //       final Hall hallO=(Hall)(intent.getSerializableExtra("hallO"));
+        // show the decorations available to the user
         list = new ArrayList<>();
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait");
         progressDialog.show();
 
         databaseReference = FirebaseDatabase.getInstance().getReference(DecorActivity.DATABASE_PATH);
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -93,49 +99,53 @@ public class ChooseDecorationActivity extends AppCompatActivity {
                         .setAction( "Action", null ).show();
             }
         } );
+        // get what the user choose and put it in intent
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
 
+                decorChosen[0] =list.get(position);
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        ChooseDecorationActivity.this );
+                alert.setTitle( "Confirm" );
+                alert.setMessage( "Are you sure you want this Decoration? " );
+                alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
 
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    intent1.putExtra( "decorS",(String) decorChosen[0].getImageUri() );
+                //        intent1.putExtra("decorO", decorChosen);
+                        Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
+                        dialog.dismiss();
+
+                    }
+                } );
+                alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                } );
+
+                alert.show();
+
+            }
+        });
         next=(Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                final  Intent intent=new Intent(ChooseDecorationActivity.this, ChooseFoodActivity.class);
-                intent.putExtra( "type", type );
-                intent.putExtra( "date", date );
-                intent.putExtra( "guests", guests );
-                intent.putExtra( "location", location );
-                intent.putExtra( "hall", hall );
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(
-                                ChooseDecorationActivity.this );
-                        alert.setTitle( "Confirm" );
-                        alert.setMessage( "Are you sure you want this Decoration? " );
-                        alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
 
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                intent.putExtra( "decor", databaseReference.getRoot().child( DATABASE_PATH ).child( keyList.get( position ) ).getClass().toString() );
-                                Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
-                                dialog.dismiss();
+                intent1.putExtra( "type", type );
+                intent1.putExtra( "date", date );
+                intent1.putExtra( "guests", guests );
+                intent1.putExtra( "location", location );
+               intent1.putExtra( "hallS",hallS );
+            //    intent1.putExtra("bundle",bundle1);
 
-                            }
-                        } );
-                        alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                dialog.dismiss();
-                            }
-                        } );
-
-                        alert.show();
-
-                    }
-                });
-                startActivity(intent);
+                startActivity(intent1);
 
 
 

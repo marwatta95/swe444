@@ -1,7 +1,9 @@
 package net.marwa.applicationy;
 
 
-public class Decor {
+import java.io.Serializable;
+
+public class Decor implements Serializable {
     String type;
     double price;
     String imageUri;

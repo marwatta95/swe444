@@ -1,12 +1,11 @@
 package net.marwa.applicationy;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-/**
- * Created by samar fares on 3/2/2018.
- */
 
-public class Clown {
+
+public class Clown implements Serializable {
     String name;
     double price;
     String imageUri;

@@ -130,18 +130,7 @@ public class HeadActivity extends AppCompatActivity {
 
             }
         });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                list.remove(position);
-                myAdapter.notifyDataSetChanged();
 
-                databaseReference.getRoot().child(DATABASE_PATH).child(keyList.get(position)).removeValue();
-                keyList.remove(position);
-                Toast.makeText(getApplicationContext(),"Deleted Successfully!!!",Toast.LENGTH_LONG).show();
-
-            }
-        });
 
     }
 

@@ -44,18 +44,28 @@ public class ChooseBandActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
+        final  Intent intent1=new Intent(ChooseBandActivity.this, ChooseMakeupActivity.class);
         final String type = intent.getExtras().getString( "type" );
         final String date = intent.getExtras().getString( "date" );
         final String guests = intent.getExtras().getString( "guests" );
         final String location = intent.getExtras().getString( "location" );
-        final String hall = intent.getExtras().getString( "hall" );
-        final String decor = intent.getExtras().getString( "decor" );
-        final String appetizer = intent.getExtras().getString( "appetizer" );
-        final String main = intent.getExtras().getString( "main" );
-        final String dessert = intent.getExtras().getString( "dessert" );
-        final String cake = intent.getExtras().getString( "cake" );
-        final String photographer = intent.getExtras().getString( "photographer" );
+        final String hallS=intent.getStringExtra("hallS");
+        final String decorS=intent.getStringExtra("decorS");
+        final String appetizerS = intent.getStringExtra( "appetizerS" );
+        final String mainS = intent.getStringExtra( "mainS" );
+        final String dessertS = intent.getStringExtra( "dessertS" );
+        final String cakeS = intent.getStringExtra( "cakeS" );
+        final String photographerS = intent.getStringExtra("photoS" );
 
+        final Band[] bandChosen = new Band[1];
+
+    /*   final Hall hallO=(Hall)intent.getSerializableExtra("hallO");
+        final Decor decorO=(Decor)intent.getSerializableExtra("decorO");
+        final Food appetizerO=(Food)intent.getSerializableExtra("appetizerO");
+        final Food mainO=(Food)intent.getSerializableExtra("mainO");
+        final Food dessertO=(Food)intent.getSerializableExtra("dessertO");
+        final Food cakeO=(Food)intent.getSerializableExtra("cakeO");
+        final Photographer photographerO=(Photographer)intent.getSerializableExtra("photographerO");*/
 
         list = new ArrayList<>();
 
@@ -103,60 +113,63 @@ public class ChooseBandActivity extends AppCompatActivity {
             }
         } );
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
+                bandChosen[0]=list.get(position);
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        ChooseBandActivity.this );
+                alert.setTitle( "Confirm" );
+                alert.setMessage( "Are you sure you want this? " );
+                alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
 
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        intent1.putExtra( "bandS", (String)bandChosen[0].getName() );
+                  //      intent1.putExtra( "bandO", databaseReference.getRoot().child( BandActivity.DATABASE_PATH ).child( keyList.get( position ) ).getClass() );
+
+                        Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
+                        dialog.dismiss();
+
+                    }
+                } );
+                alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                } );
+
+                alert.show();
+
+            }
+        });
         next=(Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                final  Intent intent=new Intent(ChooseBandActivity.this, ChooseMakeupActivity.class);
-                intent.putExtra( "type", type );
-                intent.putExtra( "date", date );
-                intent.putExtra( "guests", guests );
-                intent.putExtra( "location", location );
-                intent.putExtra( "hall", hall );
-                intent.putExtra( "decor", decor );
-                intent.putExtra( "appetizer", appetizer );
-                intent.putExtra( "main", main );
-                intent.putExtra( "dessert", dessert );
-                intent.putExtra( "cake", cake );
-                intent.putExtra( "photographer", photographer );
 
-
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(
-                                ChooseBandActivity.this );
-                        alert.setTitle( "Confirm" );
-                        alert.setMessage( "Are you sure you want this? " );
-                        alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                intent.putExtra( "band", databaseReference.getRoot().child( BandActivity.DATABASE_PATH ).child( keyList.get( position ) ).getClass().toString() );
-                                Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
-                                dialog.dismiss();
-
-                            }
-                        } );
-                        alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                dialog.dismiss();
-                            }
-                        } );
-
-                        alert.show();
-
-                    }
-                });
-
-
-
-
-                startActivity(intent);
+                intent1.putExtra( "type", type );
+                intent1.putExtra( "date", date );
+                intent1.putExtra( "guests", guests );
+                intent1.putExtra( "location", location );
+                intent1.putExtra( "hallS", hallS );
+                intent1.putExtra( "decorS", decorS );
+                intent1.putExtra( "appetizerS", appetizerS );
+                intent1.putExtra( "mainS", mainS );
+                intent1.putExtra( "dessertS", dessertS );
+                intent1.putExtra( "cakeS", cakeS );
+                intent1.putExtra("photoS",photographerS);
+             /*   intent1.putExtra("hallO",hallO);
+                intent1.putExtra("decorO",decorO);
+                intent1.putExtra( "appetizerO", appetizerO );
+                intent1.putExtra( "mainO", mainO );
+                intent1.putExtra( "dessertO", dessertO );
+                intent1.putExtra( "cakeO", cakeO );
+                intent1.putExtra("photographerO",photographerO);*/
+                startActivity(intent1);
 
 
 

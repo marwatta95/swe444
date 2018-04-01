@@ -35,6 +35,7 @@ public class ChooseHallActivity extends AppCompatActivity {
     public static final String DATABASE_PATH = "Halls";
     MyAdapterChooseHall myAdapter;
     private Button next;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -45,6 +46,10 @@ public class ChooseHallActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
+        final  Intent intent1=new Intent(ChooseHallActivity.this, ChooseDecorationActivity.class);
+        final Bundle bundle=new Bundle();
+        //**************************************
+        final Hall[] hallChosen = new Hall[1];
         final String type = intent.getExtras().getString( "type" );
         final String date = intent.getExtras().getString( "date" );
         final String guests = intent.getExtras().getString( "guests" );
@@ -97,47 +102,52 @@ public class ChooseHallActivity extends AppCompatActivity {
             }
         } );
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
+                //**********************************************************************
+                hallChosen[0] =list.get(position);
+                AlertDialog.Builder alert = new AlertDialog.Builder(
+                        ChooseHallActivity.this );
+                alert.setTitle( "Confirm" );
+                alert.setMessage( "Are you sure you want this hall? " );
+                alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
 
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //*********************************************************
+                       intent1.putExtra( "hallS",(String) hallChosen[0].getName() );
+           //            intent1.putExtra("bundle",bundle);
+                     //   intent1.putExtra("hallO", hallChosen);
+                        Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
+                        dialog.dismiss();
+
+                    }
+                } );
+                alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                } );
+
+                alert.show();
+
+            }
+        });
         next=(Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-              final  Intent intent=new Intent(ChooseHallActivity.this, ChooseDecorationActivity.class);
-                intent.putExtra( "type", type );
-                intent.putExtra( "date", date );
-                intent.putExtra( "guests", guests );
-                intent.putExtra( "location", location );
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,final int position, long id) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(
-                                ChooseHallActivity.this );
-                        alert.setTitle( "Confirm" );
-                        alert.setMessage( "Are you sure you want this hall? " );
-                        alert.setPositiveButton( "YES", new DialogInterface.OnClickListener() {
 
-                               @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                intent.putExtra( "hall", databaseReference.getRoot().child( DATABASE_PATH ).child( keyList.get( position ) ).getClass().toString() );
-                                Toast.makeText( getApplicationContext(), "Chosen Successfully!!!", Toast.LENGTH_LONG ).show();
-                                dialog.dismiss();
+                intent1.putExtra( "type", type );
+                intent1.putExtra( "date", date );
+                intent1.putExtra( "guests", guests );
+                intent1.putExtra( "location", location );
 
-                            }
-                        } );
-                        alert.setNegativeButton( "NO", new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                dialog.dismiss();
-                            }
-                        } );
-
-                        alert.show();
-
-                    }
-                });
-                startActivity(intent);
+                startActivity(intent1);
 
 
 
