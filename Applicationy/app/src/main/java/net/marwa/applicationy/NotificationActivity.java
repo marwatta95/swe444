@@ -25,9 +25,9 @@ public class NotificationActivity extends AppCompatActivity {
         textView=(TextView) findViewById( R.id.textNotification ) ;
         Intent intent = getIntent();
         if(intent.getExtras().getString( "notification" )!=null)
-          type1 = intent.getExtras().getString( "notification" );
+          type1 = intent.getStringExtra( "notification" );
 
-        textView.setText( type1 );
+        textView.setText( "This head is been assigned to help you in your party and makes sure you are fully satisfied "+type1 );
         buttonSave=(Button) findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

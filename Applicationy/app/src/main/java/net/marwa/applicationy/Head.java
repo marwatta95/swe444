@@ -28,5 +28,6 @@ String location;
     public String getLast() {
         return last;
     }
+    public String getName(){return first+ "  "+last;}
 
 }

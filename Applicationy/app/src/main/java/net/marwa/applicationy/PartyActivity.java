@@ -47,7 +47,7 @@ public class PartyActivity extends AppCompatActivity {
     private TextView hair;
     private DatabaseReference dr;
     private  Party party;
-    private Head yourHead;
+    private Head[] yourHead=new Head[1];
     List<Head> list;
     private StorageReference storageReference;
    Hall h;
@@ -217,7 +217,7 @@ String food1="";
 
 
                 int index = new Random().nextInt(list.size());
-                yourHead = list.get(index);
+                yourHead[0] = list.get(index);
 
 
                 notification.setSmallIcon( R.mipmap.ic_launcher );
@@ -226,10 +226,10 @@ String food1="";
 
                 notification.setContentTitle( "Now one Last step!!" );
 
-                notification.setContentText( "This head is been assigned to help you in your party and makes sure you are fully satisfied \n "+yourHead );
+                notification.setContentText( "This head is been assigned to help you in your party and makes sure you are fully satisfied \n "+(String)yourHead[0].getName() );
 
                 Intent intent=new Intent(getApplicationContext(),NotificationActivity.class);
-                intent.putExtra( "notification","This head is been assigned to help you in your party and makes sure you are fully satisfied \n "+yourHead.toString() );
+                intent.putExtra( "notification",yourHead[0].getName() );
                 PendingIntent pendingIntent=PendingIntent.getActivity(getApplicationContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
                 notification.setContentIntent( pendingIntent );
                 NotificationManager nm = (NotificationManager) getSystemService( NOTIFICATION_SERVICE );
